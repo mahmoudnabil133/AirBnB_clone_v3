@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>AirBnB clone</title>
+
+		<link rel="shortcut icon" href="../static/images/icon.ico" >
+
+		<link rel="stylesheet" href="../static/styles/4-common.css"/>
+		<link rel="stylesheet" href="../static/styles/3-header.css"/>
+		<link rel="stylesheet" href="../static/styles/3-footer.css"/>
+		<link rel="stylesheet" href="../static/styles/6-filters.css"/>
+		<link rel="stylesheet" href="../static/styles/100-places.css"/>
+	</head>
+    <body>
+		<header>
+			<div id="header_logo"></div>
+		</header>
+		<div class="container">
+			<section class="filters">
+				<button>Search</button>
+				<div class="locations">
+					<h3>States</h3>
+					<h4>California, Arizona...</h4>
+					<ul class="popover">
+						<!-- <li><h2>Arizona</h2>
+							<ul>
+								<li><h4>Page</h4></li>
+								<li><h4>Page2</h4></li>
+							</ul></li>
+						<li><h2>California</h2>
+							<ul>
+								<li><h4>San Francisco</h4></li>
+								<li><h4>Los Altos</h4></li>
+							</ul></li> -->
+                        {% for st in states %}
+                        <li>
+                            <H2> {{ st.name }}</H2>
+                            <UL>
+                                <LI>
+                                    {% for ct in st.cities %}
+                                        <H4> {{ ct.name }}</H4>
+                                    {% endfor %}
+                                </LI>
+                            </UL>
+                        </li>
+                        {% endfor %}
+					</ul>
+				</div>
+				<div class="filter_amenities">
+					<h3>Amenities</h3>
+					<h4>Internet, Kitchen...</h4>
+					<ul class="popover">
+                        {% for amen in amens %}
+                            <LI>{{ amen.name }}</LI>
+                        {% endfor %}
+					</ul>
+				</div>
+
+			</section>
+			<section class="places">
+				<h1>Places</h1>
+                {% for place in places %}
+                    <article>
+                        <div class="headline">
+                            <h2 class="article_title">{{ place.name }}</h2>
+                            <div class="price_by_night">{{ place.price_by_night }}</div>
+                        </div>
+                        <div class="information">
+                            <div class="max_guest">
+                                <div class="guest_icon"></div>
+                                <p>{{ place.max_guest }} Guests</p>
+                            </div>
+                            <div class="number_rooms">
+                                <div class="bed_icon"></div>
+                                <p>{{ place.number_rooms}} Bedroom</p>
+                            </div>
+                            <div class="number_bathrooms">
+                                <div class="bath_icon"></div>
+                                <p>{{ place.number_bathrooms }} Bathroom</p>
+                            </div>
+                        </div>
+                        <div class="user">
+                            <b>Owner</b>
+                            {%set id = 'User.' ~ place.user_id%}
+                            {% set user = users[id] %}
+                            : {{ user.first_name }}
+                        </div>
+                        <div class="description">
+                            {{ place.description }}
+                        </div>
+                        <div class="amenities">
+                            <h2 class="article_subtitle">Amenities</h2>
+                            <ul>
+                                <li><div class="tv_icon"></div>TV</li>
+                                <li><div class="wifi_icon"></div>Wifi</li>
+                                <li><div class="pet_icon"></div>Pet friendly</li>
+                                {% for amen in place.amenities %}
+                                    <LI>{{ amen.name }}</LI>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="reviews">
+                            <h2 class="article_subtitle">Reviews</h2>
+                            <ul>
+                                {% for rev in place.reviews %}
+                                <li>
+                                    <div class="review_item">
+                                        {% set id2 = 'User.' ~ rev.user_id %}
+                                        {% set user2 = users[id] %}
+                                        <h3>From {{ user2.first_name }} {{ user2.last_name}} the {{ rev.created_at }}</h3>
+                                        <p class="review_text">{{rev.text}}</p>
+                                    </div>
+                                </li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                    </article>
+                {% endfor %}
+			</section>
+		</div>
+		<footer>
+			<p>Holberton School</p>
+		</footer>
+	</body>
+</html>
