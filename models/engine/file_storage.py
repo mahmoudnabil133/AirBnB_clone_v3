@@ -70,3 +70,18 @@ class FileStorage:
     def close(self):
         " doc for func"
         self.reload()
+
+    def get(self, cls, id):
+        """get an object"""
+        obj = self.all(cls)
+        for i, j in obj.items():
+            match = cls + '.' + id
+            if i == match:
+                return j
+
+        return None
+
+    def count(self, cls=None):
+        """count no. of objects"""
+        obj = self.all(cls)
+        return len(obj)
