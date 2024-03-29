@@ -23,7 +23,7 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
 
 
-class TestFileStorageDocs(unittest.TestCase):
+class testFileStorageDocs(unittest.TestCase):
     """Tests to check the documentation and style of FileStorage class"""
     @classmethod
     def setUpClass(cls):
@@ -113,3 +113,25 @@ class TestFileStorage(unittest.TestCase):
         with open("file.json", "r") as f:
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_get(self):
+        """test get method"""
+        new_state = State(name="NewYork")
+        models.storage.new(new_state)
+        key = "State.{}".format(new_state.id)
+        res = models.storage.get("State", new_state.id)
+        self.assertTrue(res.id, new_state.id)
+        serf.assertIsInstance(res, State)
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_count(self):
+        """test count method"""
+        count = models.storage.count("State")
+        state1 = State(name="NewYork")
+        models.storage.new(state1)
+        state2 = State(name="Virginia")
+        models.storage.new(state2)
+        state3 = State(name="California")
+        models.storage.new(state3)
+        self.assertEqual(count + 3, models.storage.count("State"))
