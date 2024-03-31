@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""states"""
+"""amenities"""
 from api.v1.views import app_views
 from flask import request, abort, jsonify
 from models import storage
@@ -29,7 +29,7 @@ def get_amenity(amenity_id):
 @app_views.route('/amenities/<amenity_id>', methods=['DELETE'])
 def delete_amenity(amenity_id):
     """delete amenity"""
-    all_amenities = storage.all(amenity).values()
+    all_amenities = storage.all(Amenity).values()
     amenity_obj = [obj.to_dict() for obj in all_amenities
                    if obj.id == amenity_id]
     if amenity_obj == []:
@@ -42,8 +42,8 @@ def delete_amenity(amenity_id):
     return jsonify({}), 200
 
 
-@app_views.route('/amenity/', methods=['POST'])
-def create_state():
+@app_views.route('/amenities/', methods=['POST'])
+def create_amenity():
     """create state"""
     if not request.get_json():
         abort(400, 'Not a JSON')
@@ -53,12 +53,12 @@ def create_state():
     new_amenity = Amenity(name=request.json['name'])
     storage.new(new_amenity)
     storage.save()
-    states.append(new_amenity.to_dict())
+    amenities.append(new_amenity.to_dict())
     return jsonify(amenities[0]), 201
 
 
 @app_views.route('/amenities/<amenity_id>', methods=['PUT'])
-def updates_state(amenity_id):
+def updates_amenity(amenity_id):
     """update amenity"""
     all_amenities = storage.all(Amenity).values()
     amenity_obj = [obj.to_dict() for obj in all_amenities
