@@ -53,7 +53,7 @@ def get_city(city_id):
 
 
 @app_views.route('/cities/<city_id>', methods=['DELETE'])
-def delete_city(city):
+def delete_city(city_id):
     """delete city"""
     all_cities = storage.all(City).values()
     city_obj = [obj.to_dict() for obj in all_cities if obj.id == city_id]
