@@ -14,7 +14,10 @@ classes = {"users": "User", "places": "Place", "states": "State",
            "cities": "City", "amenities": "Amenity",
            "reviews": "Review"}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 411e5420eb492cdca801a8453990c7a36cecb08f
 @app_views.route('/status', methods=['GET'])
 def status():
     """route to status"""

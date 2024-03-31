@@ -75,7 +75,7 @@ class FileStorage:
         """get an object"""
         obj = self.all(cls)
         for i, j in obj.items():
-            match = cls + '.' + id
+            match = cls.__name__ + '.' + id
             if i == match:
                 return j
 
