@@ -51,11 +51,11 @@ def create_user():
     if 'password' not in request.get_json():
         abort(400, 'Missing name')
     users = []
-    new_user = User(name=request.json['email'],
+    new_user = User(email=request.json['email'],
                     password=request.json['password'])
     storage.new(new_user)
     storage.save()
-    states.append(new_user.to_dict())
+    users.append(new_user.to_dict())
     return jsonify(users[0]), 201
 
 
