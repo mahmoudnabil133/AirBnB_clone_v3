@@ -11,14 +11,14 @@ import uuid
 @app_views.route('/states/', methods=['GET'])
 def list_states():
     """list states"""
-    list_states = [obj.to_dict() for obj in storage.all("State").values()]
+    list_states = [obj.to_dict() for obj in storage.all(State).values()]
     return jsonify(list_states)
 
 
 @app_views.route('/states/<state_id>', methods=['GET'])
 def get_state(state_id):
     """get state"""
-    all_states = storage.all("State").values()
+    all_states = storage.all(State).values()
     states_obj = [obj.to_dict() for obj in all_states if obj.id == state_id]
     if states_obj == []:
         abort(404)
@@ -28,7 +28,7 @@ def get_state(state_id):
 @app_views.route('/states/<state_id>', methods=['DELETE'])
 def delete_state(state_id):
     """delete state"""
-    all_states = storage.all("State").values()
+    all_states = storage.all(State).values()
     states_obj = [obj.to_dict() for obj in all_states if obj.id == state_id]
     if states_obj == []:
         abort(404)
@@ -58,7 +58,7 @@ def create_state():
 @app_views.route('/states/<state_id>', methods=['PUT'])
 def update_state(state_id):
     """update state"""
-    all_states = storage.all("State").values()
+    all_states = storage.all(State).values()
     states_obj = [obj.to_dict() for obj in all_states if obj.id == state_id]
     if states_obj == []:
         abort(404)
