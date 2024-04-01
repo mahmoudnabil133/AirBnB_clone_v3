@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""users"""
+"""users amenity"""
 from api.v1.views import app_views
 from flask import request, abort, jsonify
 from models import storage
