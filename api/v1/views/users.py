@@ -12,14 +12,14 @@ import uuid
 @app_views.route('/users', methods=['GET'])
 def list_users():
     """list users"""
-    list_users = [obj.to_dict() for obj in storage.all("User").values()]
+    list_users = [obj.to_dict() for obj in storage.all(User).values()]
     return jsonify(list_users)
 
 
 @app_views.route('/users/<user_id>', methods=['GET'])
 def get_user(user_id):
     """get user"""
-    all_users = storage.all("User").values()
+    all_users = storage.all(User).values()
     user_obj = [obj.to_dict() for obj in all_users if obj.id == user_id]
     if user_obj == []:
         abort(404)
@@ -29,7 +29,7 @@ def get_user(user_id):
 @app_views.route('/users/<user_id>', methods=['DELETE'])
 def delete_user(user_id):
     """delete user"""
-    all_users = storage.all("User").values()
+    all_users = storage.all(User).values()
     user_obj = [obj.to_dict() for obj in all_users if obj.id == user_id]
     if user_obj == []:
         abort(404)
@@ -62,7 +62,7 @@ def create_user():
 @app_views.route('/users/<user_id>', methods=['PUT'])
 def updates_user(user_id):
     """update user"""
-    all_users = storage.all("User").values()
+    all_users = storage.all(User).values()
     user_obj = [obj.to_dict() for obj in all_users if obj.id == user_id]
     if user_obj == []:
         abort(404)
