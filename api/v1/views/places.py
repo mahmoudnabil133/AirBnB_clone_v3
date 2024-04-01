@@ -17,7 +17,7 @@ def list_places_of_city(city_id):
     city_obj = [obj.to_dict() for obj in all_cities if obj.id == city_id]
     if city_obj == []:
         abort(404)
-    list_places = [obj.to_dict() for obj in storage.all(Place).vlaues(),
+    list_places = [obj.to_dict() for obj in storage.all(Place).vlaues()
                    if city_id == obj.city_id]
     return jsonify(list_places)
 
