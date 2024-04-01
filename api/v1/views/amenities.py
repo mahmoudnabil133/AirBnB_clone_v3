@@ -11,14 +11,14 @@ import uuid
 @app_views.route('/amenities/', methods=['GET'])
 def list_amenities():
     """list amenities"""
-    list_amenities = [obj.to_dict() for obj in storage.all(Amenity).values()]
+    list_amenities = [obj.to_dict() for obj in storage.all("Amenity").values()]
     return jsonify(list_amenities)
 
 
 @app_views.route('/amenities/<amenity_id>', methods=['GET'])
 def get_amenity(amenity_id):
     """get amenity"""
-    all_amenities = storage.all(Amenity).values()
+    all_amenities = storage.all("Amenity").values()
     amenity_obj = [obj.to_dict() for obj in all_amenities
                    if obj.id == amenity_id]
     if amenity_obj == []:
@@ -29,7 +29,7 @@ def get_amenity(amenity_id):
 @app_views.route('/amenities/<amenity_id>', methods=['DELETE'])
 def delete_amenity(amenity_id):
     """delete amenity"""
-    all_amenities = storage.all(Amenity).values()
+    all_amenities = storage.all("Amenity").values()
     amenity_obj = [obj.to_dict() for obj in all_amenities
                    if obj.id == amenity_id]
     if amenity_obj == []:
@@ -60,7 +60,7 @@ def create_amenity():
 @app_views.route('/amenities/<amenity_id>', methods=['PUT'])
 def updates_amenity(amenity_id):
     """update amenity"""
-    all_amenities = storage.all(Amenity).values()
+    all_amenities = storage.all("Amenity").values()
     amenity_obj = [obj.to_dict() for obj in all_amenities
                    if obj.id == amenity_id]
     if amenity_obj == []:
