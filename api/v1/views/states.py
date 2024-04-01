@@ -8,6 +8,9 @@ from datetime import datetime
 import uuid
 
 
+app.url_map.strict_slashes = False
+
+
 @app_views.route('/states/', methods=['GET'])
 def list_states():
     """list states"""
