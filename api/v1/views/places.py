@@ -59,15 +59,15 @@ def create_city(city_id):
         abort(400, 'Missing name')
     all_cities = storage.all(City).values()
     city_obj = [obj.to_dict() for obj in all_cities
-                 if obj.id == city_id]
+                if obj.id == city_id]
     if city_obj == []:
         abort(404)
     places = []
     new_place = User(name=request.json['name'],
-                    user_id=request.json['user_id'], city_id=city_id)
+                     user_id=request.json['user_id'], city_id=city_id)
     all_users = storage.all(User).values()
     user_obj = [obj.to_dict() for obj in all_users
-                 if obj.id == new_place.user_id]
+                if obj.id == new_place.user_id]
     if user_obj == []:
         abort(404)
     storage.new(new_place)
