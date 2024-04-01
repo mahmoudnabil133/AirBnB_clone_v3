@@ -15,10 +15,10 @@ classes = {"users": User, "places": Place, "states": State,
            "reviews": Review}
 
 
-@app_views.route('/status', strict_slashes=False, methods=['GET'])
+@app_views.route('/status', methods=['GET'])
 def status():
     """route to status"""
-    return jsonify(status='OK')
+    return jsonify({'status': 'OK'})
 
 
 @app_views.route('/stats', methods=['GET'])
