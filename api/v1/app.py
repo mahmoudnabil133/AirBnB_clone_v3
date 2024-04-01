@@ -1,9 +1,5 @@
 #!/usr/bin/python3
-"""
-
-app
-
-"""
+"""checking and closing app"""
 from flask import Flask, Blueprint, make_response, jsonify
 from models import storage
 from api.v1.views import app_views
@@ -18,18 +14,17 @@ app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def tear(self):
-    """close storage"""
+    """close any existing storage"""
     storage.close()
 
 
 @app.errorhandler(404)
 def not_found(error):
-    """handle 404 error"""
+    """handle 404 for any error"""
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
 if __name__ == "__main__":
-    """__name__"""
     host = getenv('HBNB_API_HOST')
     port = getenv('HBNB_API_PORT')
     if not host:
