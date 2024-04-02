@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """checking and closing app"""
+
 from flask import Flask, make_response, jsonify
 from models import storage
 from api.v1.views import app_views
