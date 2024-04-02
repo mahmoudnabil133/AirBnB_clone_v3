@@ -28,6 +28,7 @@ def not_found(error):
 
 
 if __name__ == '__main__':
+    """checkking"""
     if getenv("HBNB_API_HOST") is None:
         HBNB_API_HOST = '0.0.0.0'
     else:
